@@ -1,0 +1,46 @@
+# ==========================================
+# Compilación y Binarios (Archivos generados)
+# ==========================================
+build/
+Debug/
+Release/
+*.o
+*.d
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+
+# ==========================================
+# Archivos temporales de CMake y Ninja
+# ==========================================
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+compile_commands.json
+.ninja_deps
+.ninja_log
+build.ninja
+
+# ==========================================
+# Archivos de caché de STM32CubeMX
+# ==========================================
+*.bak
+.mxproject
+
+# ==========================================
+# Archivos temporales de Visual Studio Code
+# ==========================================
+.vscode/ipch/
+.vscode/.browse.c_cpp.db*
+.history/
+*.code-workspace
+
+# ==========================================
+# Archivos ocultos del Sistema Operativo
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
