@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    usart.c
+  * @file    UART.c
   * @brief   This file provides code for the configuration
   *          of the USART instances.
   ******************************************************************************
@@ -18,7 +18,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "usart.h"
+#include "UART.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -110,4 +110,3 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-

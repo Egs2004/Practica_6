@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    tim.h
+  * @file    LED.h
   * @brief   This file contains all the function prototypes for
-  *          the tim.c file
+  *          the LED.c file
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __TIM_H__
-#define __TIM_H__
+#ifndef __LED_H__
+#define __LED_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -32,13 +32,11 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-extern TIM_HandleTypeDef htim2;
-
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
-void MX_TIM2_Init(void);
+void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
@@ -47,6 +45,4 @@ void MX_TIM2_Init(void);
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* __TIM_H__ */
-
+#endif /*__ LED_H__ */

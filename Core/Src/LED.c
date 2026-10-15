@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    gpio.c
+  * @file    LED.c
   * @brief   This file provides code for the configuration
   *          of all used GPIO pins.
   ******************************************************************************
@@ -19,7 +19,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "gpio.h"
+#include "LED.h"
 
 /* USER CODE BEGIN 0 */
 

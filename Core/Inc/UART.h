@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    usart.h
+  * @file    UART.h
   * @brief   This file contains all the function prototypes for
-  *          the usart.c file
+  *          the UART.c file
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USART_H__
-#define __USART_H__
+#ifndef __UART_H__
+#define __UART_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,5 +48,4 @@ void MX_USART2_UART_Init(void);
 }
 #endif
 
-#endif /* __USART_H__ */
-
+#endif /* __UART_H__ */

@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    tim.c
+  * @file    Timer.c
   * @brief   This file provides code for the configuration
   *          of the TIM instances.
   ******************************************************************************
@@ -18,7 +18,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "tim.h"
+#include "Timer.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -109,4 +109,3 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
-
