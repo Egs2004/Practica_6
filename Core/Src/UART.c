@@ -19,6 +19,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "UART.h"
+#include "stm32f1xx_hal.h"
+#include <string.h>
 
 /* USER CODE BEGIN 0 */
 
@@ -108,5 +110,17 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+// Referencia al USART2 (conectado al USB de la NUCLEO)
+extern UART_HandleTypeDef huart2;
 
+void UART_Init(void)
+{
+    // CubeMX ya inicializa el hardware en main.c
+    // Este espacio se reserva para inicializar buffers o variables si el proyecto crece
+}
+
+void UART_SendString(const char *str)
+{
+    HAL_UART_Transmit(&huart2, (uint8_t *)(void *)str, strlen(str), HAL_MAX_DELAY);
+}
 /* USER CODE END 1 */
