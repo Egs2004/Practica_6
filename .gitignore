@@ -23,6 +23,7 @@ compile_commands.json
 .ninja_deps
 .ninja_log
 build.ninja
+.clangd
 
 # ==========================================
 # Archivos de caché de STM32CubeMX
@@ -44,3 +45,8 @@ build.ninja
 .DS_Store
 Thumbs.db
 desktop.ini
+# ==========================================
+# Entornos de desarrollo locales
+# ==========================================
+.vscode/
+.settings/
