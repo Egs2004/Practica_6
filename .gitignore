@@ -29,7 +29,6 @@ build.ninja
 # Archivos de caché de STM32CubeMX
 # ==========================================
 *.bak
-.mxproject
 
 # ==========================================
 # Archivos temporales de Visual Studio Code
