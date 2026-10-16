@@ -19,9 +19,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "Timer.h"
+#include "stm32f1xx_hal.h"
 
 /* USER CODE BEGIN 0 */
-
+extern TIM_HandleTypeDef htim2;
+static volatile uint8_t timer_flag = 0;
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim2;
@@ -107,5 +109,39 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 }
 
 /* USER CODE BEGIN 1 */
+void Timer_Init(void)
+{
+    timer_flag = 0;
+    HAL_TIM_Base_Start_IT(&htim2);
+}
 
+void Timer_SetPeriod(uint32_t period_ms)
+{
+    if (period_ms == 0) return;
+    
+    // Cálculo para reloj de 72MHz con PSC=7199
+    uint32_t new_arr = (period_ms * 10U) - 1U;
+    
+    __HAL_TIM_SET_AUTORELOAD(&htim2, new_arr);
+    __HAL_TIM_SET_COUNTER(&htim2, 0); // Previene desbordes
+}
+
+uint8_t Timer_HasElapsed(void)
+{
+    if (timer_flag)
+    {
+        timer_flag = 0;
+        return 1;
+    }
+    return 0;
+}
+
+// Interrupción encapsulada
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+    if (htim->Instance == TIM2)
+    {
+        timer_flag = 1;
+    }
+}
 /* USER CODE END 1 */

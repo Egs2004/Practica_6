@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file    UART.h
   * @brief   This file contains all the function prototypes for
-  *          the UART.c file
+  * the UART.c file
   ******************************************************************************
   * @attention
   *
@@ -29,7 +29,8 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+void UART_Init(void);
+void UART_SendString(const char *str);
 /* USER CODE END Includes */
 
 extern UART_HandleTypeDef huart2;

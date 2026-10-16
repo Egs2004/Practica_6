@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file    Timer.h
   * @brief   This file contains all the function prototypes for
-  *          the Timer.c file
+  * the Timer.c file
   ******************************************************************************
   * @attention
   *
@@ -21,6 +21,8 @@
 #ifndef __TIMER_H__
 #define __TIMER_H__
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,7 +31,9 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+void Timer_Init(void);
+void Timer_SetPeriod(uint32_t period_ms);
+uint8_t Timer_HasElapsed(void);
 /* USER CODE END Includes */
 
 extern TIM_HandleTypeDef htim2;
