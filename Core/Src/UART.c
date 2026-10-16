@@ -110,9 +110,6 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
-// Referencia al USART2 (conectado al USB de la NUCLEO)
-extern UART_HandleTypeDef huart2;
-
 void UART_Init(void)
 {
     // CubeMX ya inicializa el hardware en main.c

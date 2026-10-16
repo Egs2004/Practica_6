@@ -22,7 +22,6 @@
 #include "stm32f1xx_hal.h"
 
 /* USER CODE BEGIN 0 */
-extern TIM_HandleTypeDef htim2;
 static volatile uint8_t timer_flag = 0;
 /* USER CODE END 0 */
 
@@ -124,6 +123,7 @@ void Timer_SetPeriod(uint32_t period_ms)
     
     __HAL_TIM_SET_AUTORELOAD(&htim2, new_arr);
     __HAL_TIM_SET_COUNTER(&htim2, 0); // Previene desbordes
+    timer_flag = 0;                   // Descarta eventos del periodo anterior
 }
 
 uint8_t Timer_HasElapsed(void)

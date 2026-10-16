@@ -18,12 +18,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "Timer.h"
-#include "UART.h"
-#include "LED.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "Timer.h"
+#include "UART.h"
+#include "LED.h"
 
 /* USER CODE END Includes */
 
@@ -45,12 +45,23 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+typedef enum {
+    MODO_ENCENDIDO = 0,
+    MODO_APAGADO,
+    MODO_PARPADEO_500MS,
+    MODO_PARPADEO_200MS,
+    MODO_PARPADEO_100MS
+} SystemMode_t;
 
+static SystemMode_t modo_actual = MODO_ENCENDIDO;
+static uint32_t tiempo_ultimo_cambio = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+static void AplicarModo(SystemMode_t modo);
+static void EnviarEstado(void);
 
 /* USER CODE END PFP */
 
@@ -91,13 +102,51 @@ int main(void)
   MX_TIM2_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  LED_Init();
+  Timer_Init();
+  UART_Init();
 
+  AplicarModo(modo_actual);
+  EnviarEstado();
+  tiempo_ultimo_cambio = HAL_GetTick();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    if ((modo_actual >= MODO_PARPADEO_500MS) && Timer_HasElapsed())
+    {
+        LED_Toggle();
+        EnviarEstado();
+    }
+
+    if ((HAL_GetTick() - tiempo_ultimo_cambio) >= 5000U)
+    {
+        tiempo_ultimo_cambio = HAL_GetTick();
+
+        switch (modo_actual)
+        {
+            case MODO_ENCENDIDO:
+                modo_actual = MODO_APAGADO;
+                break;
+            case MODO_APAGADO:
+                modo_actual = MODO_PARPADEO_500MS;
+                break;
+            case MODO_PARPADEO_500MS:
+                modo_actual = MODO_PARPADEO_200MS;
+                break;
+            case MODO_PARPADEO_200MS:
+                modo_actual = MODO_PARPADEO_100MS;
+                break;
+            case MODO_PARPADEO_100MS:
+            default:
+                modo_actual = MODO_ENCENDIDO;
+                break;
+        }
+        AplicarModo(modo_actual);
+        EnviarEstado();
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -145,6 +194,58 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+static void AplicarModo(SystemMode_t modo)
+{
+    switch (modo)
+    {
+        case MODO_ENCENDIDO:
+            LED_On();
+            break;
+        case MODO_APAGADO:
+            LED_Off();
+            break;
+        case MODO_PARPADEO_500MS:
+            LED_Off();
+            Timer_SetPeriod(500);
+            break;
+        case MODO_PARPADEO_200MS:
+            LED_Off();
+            Timer_SetPeriod(200);
+            break;
+        case MODO_PARPADEO_100MS:
+            LED_Off();
+            Timer_SetPeriod(100);
+            break;
+        default:
+            LED_Off();
+            break;
+    }
+}
+
+static void EnviarEstado(void)
+{
+    switch (modo_actual)
+    {
+        case MODO_ENCENDIDO:
+            UART_SendString("Estado: LED ENCENDIDO\r\n");
+            break;
+        case MODO_APAGADO:
+            UART_SendString("Estado: LED APAGADO\r\n");
+            break;
+        case MODO_PARPADEO_500MS:
+            UART_SendString("Estado: LED PARPADEANDO, periodo 500 ms\r\n");
+            break;
+        case MODO_PARPADEO_200MS:
+            UART_SendString("Estado: LED PARPADEANDO, periodo 200 ms\r\n");
+            break;
+        case MODO_PARPADEO_100MS:
+            UART_SendString("Estado: LED PARPADEANDO, periodo 100 ms\r\n");
+            break;
+        default:
+            UART_SendString("Estado: modo desconocido\r\n");
+            break;
+    }
+}
 
 /* USER CODE END 4 */
 
